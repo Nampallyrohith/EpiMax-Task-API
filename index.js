@@ -151,7 +151,7 @@ app.get('/tasks/:id/', authenticateUser, async (request, response) => {
 //Updating the Row
 app.put('/tasks/:id/', authenticateUser, async (request, response) => {
     const {id} = request.params;
-    const {updated_at} = request.body;
+    const {status} = request.body;
     const checkQuery = `
         SELECT * FROM Tasks WHERE id=${id};
     `;
@@ -163,7 +163,7 @@ app.put('/tasks/:id/', authenticateUser, async (request, response) => {
         const updateQuery = `
         UPDATE Tasks
         SET
-            updated_at='${updated_at}'
+            status='${status}'
         WHERE id=${id}
         `
         await database.run(updateQuery);
